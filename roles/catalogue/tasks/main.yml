@@ -11,10 +11,10 @@
       name: common
       tasks_from: app-setup
 
-  - name: Install NPM
-    import_role:
-      name: common
-      tasks_from: npm-install
+  - name: Install npm 
+    command: 'npm install' 
+    args: 
+      chdir: /app
       
   - name: Systemd Setup & Start service
     import_role:
