@@ -1,5 +1,3 @@
 ---
 # vars file for web
-catalogue_host: catalogue.myclouddevops.site
-cart_host: cart.myclouddevops.site
-payment_host: payment.myclouddevops.site 
+payment_host: payment.myclouddevops.site
