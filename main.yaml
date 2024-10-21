@@ -1,6 +1,6 @@
 ---
 - name: roboshop setup
-  hosts: mongodb
+  hosts: '{{component}}'
   become: yes
   roles:
-  - mongodb
+  - '{{componenet}}'

@@ -1,0 +1,25 @@
+  - name: Check application User exit or not
+    command: id roboshop
+    register: user
+    ignore_errors: yes
+  - name: Add app user
+    user:
+      name: roboshop
+    when: user.rc != 0
+
+  - name: Check an app directory
+    stat:
+      path: /app
+    register: st  
+  - name: Create app dir
+    file:
+      path: /app
+      state: directory
+    when: st.stat.exists == false
+
+  - name: "Download & unarchive the {{component}} application code"
+    unarchive: 
+      url: "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
+      dest: /app
+      remote_src: yes
+
