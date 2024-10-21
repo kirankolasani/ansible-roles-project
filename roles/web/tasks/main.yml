@@ -25,10 +25,5 @@
     template:
       src: roboshop.conf.j2
       dest: /etc/nginx/default.d/roboshop.conf
-
-  - name: "Restart {{component}}"
-    tags:
-      - restart_service
-    import_role:
-      name: common
-      tasks_from: nginx-service
+    notify:
+      - Restart nginx

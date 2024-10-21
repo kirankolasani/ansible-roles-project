@@ -1,2 +1,4 @@
 ---
 # vars file for web
+catalogue_host=catalogue.myclouddevops.site
+cart_host=cart.myclouddevops.site
