@@ -31,4 +31,4 @@
       - restart_service
     import_role:
       name: common
-      tasks_from: restart-service
+      tasks_from: nginx-service
