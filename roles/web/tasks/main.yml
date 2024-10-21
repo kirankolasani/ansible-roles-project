@@ -1,2 +1,34 @@
 ---
 # tasks file for web
+
+  - name: Install Nginx
+    yum:
+      name: nginx
+      state: installed
+
+  - name: Remove all files under html dir
+    file:
+      path: '{{ item }}'
+      state: absent
+    with_fileglob:
+      - "/usr/share/nginx/html/*"
+
+  - name: Download & Extract the code
+    unarchive: 
+      src: "https://roboshop-builds.s3.amazonaws.com/{{component}}.zip"
+      dest: /usr/share/nginx/html/
+      remote_src: yes
+
+  - name: Create Nginx Reverse Proxy Configuration
+    tags:
+      - proxy_conf
+    template:
+      src: roboshop.conf.j2
+      dest: /etc/nginx/default.d/roboshop.conf
+
+  - name: "Restart {{component}}"
+    tags:
+      - restart_service
+    import_role:
+      name: common
+      tasks_from: restart-service
