@@ -1,2 +1,21 @@
 ---
 # tasks file for cart
+  - name: Install NodeJS 
+    import_role:
+      name: common
+      tasks_from: nodejs
+
+  - name: App Setup
+    import_role:
+      name: common
+      tasks_from: app-setup
+
+  - name: Install NPM 
+    import_role:  
+      name: common
+      tasks_from: npm-install
+      
+  - name: Systemd Setup & Start service
+    import_role:
+      name: common
+      tasks_from: systemd-setup
