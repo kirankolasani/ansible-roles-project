@@ -4,11 +4,10 @@
   - name: Install NodeJS 
     import_role:
       name: common
-      tasks_from: nodejs
-  - name: App Setup
-    import_role:
-      name: common
-      tasks_from: app-setup
+      tasks_from: 
+        - "nodejs"
+        - "app-setup"
+
 
 
   
