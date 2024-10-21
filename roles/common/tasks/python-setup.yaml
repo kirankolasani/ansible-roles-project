@@ -1,0 +1,6 @@
+  - name: Install Python 3.6
+    yum:
+      name: '{{item}}'
+      state: installed
+    loop:
+      - ["python36", "gcc", "python3-devel"]

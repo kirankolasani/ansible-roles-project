@@ -1,2 +1,34 @@
 ---
 # tasks file for shipping
+  - name: Install Maven 
+    import_role:
+      name: common
+      tasks_from: maven-setup
+
+  - name: App Setup
+    import_role:
+      name: common
+      tasks_from: app-setup
+
+  - name: download the dependencies & build the application
+    command: '{{item}}'
+    args:
+      chdir: /app
+    loop:
+      - "mvn clean package"
+      - "mv target/shipping-1.0.jar shipping.jar"
+  
+  - name: SyatemD setup & Start service
+    import_role:
+      name: common
+      tasks_from: systemd-setup
+      
+  - name: Load Schema
+    import_role:
+      name: common
+      tasks_from: load-mysql-schema
+
+  - name: Restart the service
+    import_role:
+      name: common
+      tasks_from: restart-service

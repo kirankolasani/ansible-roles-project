@@ -1,0 +1,7 @@
+  - name: Install mysql client
+    yum:
+      name: mysql
+      state: installed
+
+  - name: Load Schema
+    shell: "mysql -h {{hostvars['mysql'].ansible_host}} -uroot -pRoboShop@1 < /app/schema/{{component}}.sql"

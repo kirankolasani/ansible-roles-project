@@ -1,2 +1,23 @@
 ---
 # tasks file for payment
+  - name: Install Python 3.6
+    import_role:
+      name: common
+      tasks_from: python-setup
+  
+  - name: App Setup
+    import_role:
+      name: common
+      tasks_from: app-setup
+
+  - name: download the dependencies & build the application
+    shell: 'pip3.6 install -r requirements.txt'
+    args:
+      chdir: /app
+      
+  - name: "Setup SystemD & Start {{component}} Service"
+    import_role:
+      name: common
+      tasks_from: systemd-setup
+
+  
